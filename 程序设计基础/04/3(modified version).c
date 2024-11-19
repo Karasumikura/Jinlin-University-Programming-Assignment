@@ -1,5 +1,3 @@
-//'c'类数字可以直接用‘d’类表示，注意表示后减去48
-#define  _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #define SIZE 10
 void bdd(int a[], int n) {
