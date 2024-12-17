@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include <stdlib.h>
-
+//最初错误原因：嵌套关系不对
 
 
 struct farlei_item {
