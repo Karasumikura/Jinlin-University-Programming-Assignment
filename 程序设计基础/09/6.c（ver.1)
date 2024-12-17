@@ -1,0 +1,110 @@
+#define  _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+#include <malloc.h>
+
+struct cell {//单链表结点结构体定义
+
+    int x;
+
+    struct cell* next;
+
+};
+
+struct cell* build(void) {//新建单链表，并将建好的单链表首结点地址返回
+
+    struct cell* head, * tmp, * tail;
+
+    head = tmp = tail = NULL;
+
+    int n;
+
+    while (scanf("%d", &n) && n != 0) {
+        tmp = (struct cell*)malloc(sizeof(struct cell));
+		tmp->x = n;
+		tmp->next = NULL;
+        if (!head) {
+			head = tail = tmp;
+        }
+        else {
+            tail->next = tmp;
+            tail = tmp;
+        }
+    }
+
+    return head;//返回单链表头
+
+}
+
+struct cell* sort(struct cell* head) {//递增排序链表，head是单链表首结点指针
+	if (!head) return NULL;
+	if (!head->next) return head;
+    struct cell* p, * p0, * r, * r0, * q;
+    int t;
+    p = p0 = r = r0 = q = NULL;
+
+    p = head;
+
+    for (r = head; r; r = r->next) {
+        for (r0 = r->next; r0; r0 = r0->next) {
+			if (r->x > r0->x) {
+				t = r->x;
+				r->x = r0->x;
+				r0->x = t;
+			}
+        }
+    }
+
+    return head;
+
+}   
+
+
+
+
+
+void print(struct cell* head) {//打印整个单链表,head是单链表首结点指针
+
+    while (head) {
+		if (head->next) printf("%d ", head->x);
+		else printf("%d", head->x);
+		head = head->next;
+    }
+
+}
+
+void release(struct cell* head) {//释放单链表空间,head是单链表首结点指针
+
+	struct cell* p;
+
+	while (head) {
+		p = head;
+		head = head->next;
+		free(p);
+	}
+
+}
+
+int main(void) {
+
+    struct cell* head;
+
+    head = build();
+
+    if (head != NULL) {
+
+        head = sort(head);
+
+        print(head);
+
+    }
+    else
+
+        printf("NULL");
+
+    release(head);
+
+    return 0;
+
+}
+
